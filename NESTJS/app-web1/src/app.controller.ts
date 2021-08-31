@@ -9,4 +9,21 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get('texto')
+  holaTexto(): string{
+    return 'HOLA TEXTO ';
+  }
+
+  @Get('html')
+  holaHTML(): string{
+    return '<h1> hola HTML </h1>';
+  }
+
+  @Get('json')
+  holaJson(): string{
+    return '{mensaje: "Hola Json"}';
+  }
+
+
 }
