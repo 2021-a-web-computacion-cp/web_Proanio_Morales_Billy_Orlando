@@ -1,8 +1,31 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const session = require('express-session');
+const fileStore = require('session-file-store')(session);
+
+
+
 async function bootstrap() {
+
   const app = await NestFactory.create(AppModule);
+
+  app.use(express.static('publico'));
+  app.use(cookieParser("Me agradan los poliperros"));
+  app.use(
+      session({
+        name: 'server.session.in',
+        secret: 'Mo sera de tomar un traguito',
+        resave: true,
+        saveUnitialized: true,
+        cookie: {secure: false},
+        store: new fileStore(),
+      }),
+  );
+
+
   await app.listen(3000);
 }
 bootstrap();
