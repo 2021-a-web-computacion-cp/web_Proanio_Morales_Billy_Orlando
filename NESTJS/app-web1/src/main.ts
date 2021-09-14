@@ -10,6 +10,9 @@ const fileStore = require('session-file-store')(session);
 
 async function bootstrap() {
 
+    const app: any = await NestFactory.create(AppModule);
+    app.set('view engine', 'ejs');
+
   const app = await NestFactory.create(AppModule);
 
   app.use(express.static('publico'));

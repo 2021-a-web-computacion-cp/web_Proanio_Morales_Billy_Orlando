@@ -24,21 +24,22 @@ export class UsuarioService{
         });
     }
 
-    actualizarUno(parametrosActualizar:{
-        where: Prisma.EPN_USUARIOWhereUniqueInput,
+    actualizarUno(parametrosActualizar: {
+        id: number;
         data: Prisma.EPN_USUARIOUpdateInput;
-    }){
+    }) {
         return this.prisma.ePN_USUARIO.update({
             data: parametrosActualizar.data,
-            where: parametrosActualizar.where,
+            where: {
+                id: parametrosActualizar.id,
+            },
         });
     }
 
-    eliminarUno(where: Prisma.EPN_USUARIOWhereUniqueInput){
-        return this.prisma.ePN_USUARIO.delete({
-            where: where,
-        });
+    eliminarUno(id: number) {
+            return this.prisma.ePN_USUARIO.delete({
+                where: { id: id },
+            });
     }
-
 
 }
