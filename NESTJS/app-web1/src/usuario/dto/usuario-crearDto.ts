@@ -11,8 +11,8 @@ export class  UsuarioCrearDto{
     @IsString()
     @MinLength(3)
     @MaxLength(10)
-    nombre: String;
+    nombre: string;
 
     @IsEmpty()
-    fechaCreacion: String;
+    fechaCreacion: string;
 }

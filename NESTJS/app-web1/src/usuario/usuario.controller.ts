@@ -39,8 +39,7 @@ export class UsuarioController{
 
         try{
             const errores = await validate(usuarioCrearDto);
-
-            if(errores.length > 0){
+            if(errores.length>0){
                 console.log(JSON.stringify(errores));
                 throw new BadRequestException('No envia bien los parametross');
             }

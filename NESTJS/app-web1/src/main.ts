@@ -12,9 +12,7 @@ async function bootstrap() {
 
     const app: any = await NestFactory.create(AppModule);
     app.set('view engine', 'ejs');
-
-  const app = await NestFactory.create(AppModule);
-
+  //const app = await NestFactory.create(AppModule);
   app.use(express.static('publico'));
   app.use(cookieParser("Me agradan los poliperros"));
   app.use(

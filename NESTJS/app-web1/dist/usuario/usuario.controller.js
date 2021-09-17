@@ -16,16 +16,19 @@ exports.UsuarioController = void 0;
 const common_1 = require("@nestjs/common");
 const usuario_service_1 = require("./usuario.service");
 const class_validator_1 = require("class-validator");
-const usuario_crear_dto_1 = require("./dto/usuario-crear.dto");
+const usuario_crearDto_1 = require("./dto/usuario-crearDto");
 let UsuarioController = class UsuarioController {
     constructor(usuarioservice) {
         this.usuarioservice = usuarioservice;
+    }
+    listaUsuarios(responses) {
+        responses.render('inicio');
     }
     obtenerUno(parametroRuta) {
         return this.usuarioservice.buscarUno(+parametroRuta.idUsuario);
     }
     async crearUno(parametrosCuerpo) {
-        const usuarioCrearDto = new usuario_crear_dto_1.UsuarioCrearDto();
+        const usuarioCrearDto = new usuario_crearDto_1.UsuarioCrearDto();
         usuarioCrearDto.nombre = parametrosCuerpo.nombre;
         usuarioCrearDto.apellido = parametrosCuerpo.apellido;
         usuarioCrearDto.fechaCreacion = parametrosCuerpo.fechaCreacion;
@@ -45,6 +48,13 @@ let UsuarioController = class UsuarioController {
         }
     }
 };
+__decorate([
+    common_1.Get('lista-usuarios'),
+    __param(0, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], UsuarioController.prototype, "listaUsuarios", null);
 __decorate([
     common_1.Get(':idUsuario'),
     __param(0, common_1.Param()),
