@@ -1,1 +1,37 @@
+
+<%- include ('./comunes/cabecera.ejs') %>
+
 <h1> HOLA MUNDO </h1>
+
+
+<% /*para mostar codigo  utilizamos la sintaxys igual */%>
+
+<p><%= "Hola mostrando con codigo JS" %></p>
+
+    <% /* Ejecutrar codigo sin que se muestre en el navegador  */   %>
+
+    <% const mensaje = "Hola"  %>
+
+
+    <% const aprobado = true %>
+
+    <% if(aprobado) { %>
+    <p> APROBADO </p>
+    <% } else { %>
+        <p> RECHAZADO </p>
+    <% }%>
+
+
+
+<%  const arregloNumero = [1,2,3,4,5]%>
+
+<ul>
+    <% arregloNumero.forEach((objeto) =>{%>
+    <li> <%= objeto %> </li>
+    <% } ) %>
+</ul>
+
+
+
+
+<%- include ('./comunes/footer.ejs') %>
