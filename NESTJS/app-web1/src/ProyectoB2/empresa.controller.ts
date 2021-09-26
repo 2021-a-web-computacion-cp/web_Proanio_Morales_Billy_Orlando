@@ -28,7 +28,7 @@ export class EmpresaController{
 
     @Get ('vista-crear')
     vistaCrear(@Res() response, @Query() parametrosConsulta){
-        response.render('empresa/crear', {
+        response.render('proyecto/empresa/crear', {
             datos: {
                 mensaje: parametrosConsulta.mensaje
             }
@@ -57,12 +57,11 @@ export class EmpresaController{
     ){
         try {
             const respuestaEmpresa = await this.EmpresaServices.crearUno( {
-                razonSocial : parametrosCuerpo.nombre,
-                ruc : parametrosCuerpo.apellido,
-                telefono: parametrosCuerpo.telefono,
+                razonSocial : parametrosCuerpo.razonSocial,
+                ruc : parametrosCuerpo.ruc,
+                telefono: +parametrosCuerpo.telefono,
                 activo: parametrosCuerpo.activo
             });
-
             response.redirect ('vista-crear' + '?mensaje=Se creo la empresa ' + " " +parametrosCuerpo.razonSocial)
         } catch (error) {
             console.log(error);
@@ -84,7 +83,7 @@ export class EmpresaController{
                 busqueda: parametrosConsulta.busqueda ? parametrosConsulta.busqueda : undefined,
             });
             console.log(respuesta);
-            responses.render('empresa/lista', {
+            responses.render('proyecto/empresa/lista', {
                 datos : {
                     empresas: respuesta,
                     mensaje: parametrosConsulta.mensaje

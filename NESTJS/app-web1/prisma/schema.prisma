@@ -32,7 +32,7 @@ model EMPRESA {
     razonSocial        String
     ruc                String
     telefono           Int?
-    activo             Boolean
+    activo             Boolean     @default(true)
 }
 
 

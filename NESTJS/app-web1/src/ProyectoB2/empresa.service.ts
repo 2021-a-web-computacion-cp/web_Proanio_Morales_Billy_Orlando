@@ -26,8 +26,6 @@ export class EmpresaService{
             });
     }
 
-
-
     buscarUno(id: number){
         this.prisma.eMPRESA.findUnique({
             where: {

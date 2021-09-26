@@ -1,0 +1,69 @@
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous">
+
+
+<div class='container'>
+
+    <h1>Lista</h1>
+
+
+    <% const existeEmpresa = typeof datos.mensaje !== 'undefined' %>
+    <%  if(existeEmpresa) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= datos.mensaje %>
+        </div>
+    <%} %>
+
+    <form   action="/empresa/lista-empresas" method="get">
+        <div class="mb-3">
+            <label for="busqueda" class="form-label"> Busqueda </label>
+            <input placeholder="Ej: PC REPAIRS DP   "
+                   type="text"
+                   name="busqueda"
+                   class="form-control"
+                   id="busqueda"
+                   aria-describedby="ayudaBusqueda">
+            <div id="ayudaBusqueda" class="form-text"> Puede buscar por razon socila o ruc.
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+    </form>
+
+    <div>
+        <a href="/empresa/vista-crear">
+            <button class="btn btn-success" >
+                Crear nuevo usuario
+            </button>
+        </a>
+    </div>
+
+    <table class="table text-center">
+        <thead>
+        <tr> <th scope="col">#</th>
+            <th scope="col">Razon Social</th>
+            <th scope="col">RUC</th>
+            <th scope="col">Fecha Creacion</th>
+            <th scope="col">Activo</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% datos.empresas.forEach((objeto) =>{%>
+            <tr>
+                <th> <%= objeto.id %> </th>
+                <th> <%= objeto.razonSocial %> </th>
+                <th> <%= objeto.ruc %> </th>
+                <th> <%= objeto.fechaCreacion %> </th>
+                <th> <%= objeto.activo %> </th>
+                <th>
+                    <form action="/empresa/eliminar-empresa/<%=objeto.id %>" method="post">
+                        <button class="btn btn-danger"> Elimiar </button>
+                    </form>
+                </th>
+            </tr>
+        <% } ) %>
+        </tbody>
+    </table>
+</div>
+

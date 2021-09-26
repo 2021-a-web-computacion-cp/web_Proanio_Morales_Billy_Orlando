@@ -25,7 +25,7 @@ let EmpresaController = class EmpresaController {
         response.render('proyecto/inicioProyecto.ejs');
     }
     vistaCrear(response, parametrosConsulta) {
-        response.render('empresa/crear', {
+        response.render('proyecto/empresa/crear', {
             datos: {
                 mensaje: parametrosConsulta.mensaje
             }
@@ -44,9 +44,9 @@ let EmpresaController = class EmpresaController {
     async CrearEmpresaFormulario(response, parametrosCuerpo) {
         try {
             const respuestaEmpresa = await this.EmpresaServices.crearUno({
-                razonSocial: parametrosCuerpo.nombre,
-                ruc: parametrosCuerpo.apellido,
-                telefono: parametrosCuerpo.telefono,
+                razonSocial: parametrosCuerpo.razonSocial,
+                ruc: parametrosCuerpo.ruc,
+                telefono: +parametrosCuerpo.telefono,
                 activo: parametrosCuerpo.activo
             });
             response.redirect('vista-crear' + '?mensaje=Se creo la empresa ' + " " + parametrosCuerpo.razonSocial);
@@ -64,7 +64,7 @@ let EmpresaController = class EmpresaController {
                 busqueda: parametrosConsulta.busqueda ? parametrosConsulta.busqueda : undefined,
             });
             console.log(respuesta);
-            responses.render('empresa/lista', {
+            responses.render('proyecto/empresa/lista', {
                 datos: {
                     empresas: respuesta,
                     mensaje: parametrosConsulta.mensaje
