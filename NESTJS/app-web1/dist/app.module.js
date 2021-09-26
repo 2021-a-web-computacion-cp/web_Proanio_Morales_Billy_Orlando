@@ -13,6 +13,7 @@ const app_service_1 = require("./app.service");
 const prisma_services_1 = require("./usuario/prisma.services");
 const calculadora_module_1 = require("./Calculadora/calculadora.module");
 const usuario_modules_1 = require("./usuario/usuario.modules");
+const empresa_modules_1 = require("./ProyectoB2/empresa.modules");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -20,6 +21,7 @@ AppModule = __decorate([
         imports: [
             calculadora_module_1.CalculadoraModule,
             usuario_modules_1.UsuarioModules,
+            empresa_modules_1.EmpresaModules,
         ],
         controllers: [
             app_controller_1.AppController

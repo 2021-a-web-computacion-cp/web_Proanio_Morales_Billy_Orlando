@@ -26,4 +26,14 @@ model Mascota {
 }
 
 
+model EMPRESA {
+    id                 Int         @id @default(autoincrement())
+    fechaCreacion      DateTime    @default(now())
+    razonSocial        String
+    ruc                String
+    telefono           Int?
+    activo             Boolean
+}
+
+
 

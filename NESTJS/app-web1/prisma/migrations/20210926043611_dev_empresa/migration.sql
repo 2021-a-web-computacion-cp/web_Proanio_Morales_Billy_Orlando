@@ -1,0 +1,11 @@
+-- CreateTable
+CREATE TABLE `EMPRESA` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `fechaCreacion` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `razonSocial` VARCHAR(191) NOT NULL,
+    `ruc` VARCHAR(191) NOT NULL,
+    `telefono` INTEGER,
+    `activo` BOOLEAN NOT NULL,
+
+    PRIMARY KEY (`id`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
