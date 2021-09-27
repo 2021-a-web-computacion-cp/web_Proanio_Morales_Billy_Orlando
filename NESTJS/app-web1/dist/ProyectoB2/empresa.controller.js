@@ -50,7 +50,7 @@ let EmpresaController = class EmpresaController {
                 telefono: +parametrosCuerpo.telefono,
                 activo: parametrosCuerpo.activo
             });
-            response.redirect('vista-crear' + '?mensaje=Se creo la empresa ' + " " + parametrosCuerpo.razonSocial);
+            response.redirect('/empresa/lista-empresas' + '?mensaje=Se creo la empresa ' + " " + parametrosCuerpo.razonSocial);
         }
         catch (error) {
             console.log(error);
