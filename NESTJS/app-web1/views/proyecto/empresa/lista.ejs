@@ -47,6 +47,7 @@
             <th scope="col">Razon Social</th>
             <th scope="col">RUC</th>
             <th scope="col">Fecha Creacion</th>
+            <th scope="col">Telefono</th>
             <th scope="col">Activo</th>
         </tr>
         </thead>
@@ -57,6 +58,7 @@
                 <th> <%= objeto.razonSocial %> </th>
                 <th> <%= objeto.ruc %> </th>
                 <th> <%= objeto.fechaCreacion.getMonth() + "/" + objeto.fechaCreacion.getFullYear()%> </th>
+                <th> <%= objeto.telefono %> </th>
                 <th> <%= objeto.activo %> </th>
                 <th>
                     <form action="/empresa/vista-actualizar/<%=objeto.id %>" method="post">

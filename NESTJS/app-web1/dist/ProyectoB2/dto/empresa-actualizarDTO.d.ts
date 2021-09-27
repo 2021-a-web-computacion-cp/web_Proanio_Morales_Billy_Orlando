@@ -1,7 +1,6 @@
 export declare class EmpresaEditarDTO {
-    ruc: string;
-    razonSocial: string;
-    fechaCreacion: string;
     telefono: number;
+    ruc: string;
     activo: boolean;
+    razonSocial: string;
 }

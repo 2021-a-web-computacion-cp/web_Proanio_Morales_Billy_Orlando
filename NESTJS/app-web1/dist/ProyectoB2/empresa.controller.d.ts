@@ -10,5 +10,5 @@ export declare class EmpresaController {
     obtenerUno(parametroRuta: any): import(".prisma/client").Prisma.Prisma__EMPRESAClient<import(".prisma/client").EMPRESA>;
     crearUno(parametrosCuerpo: any): Promise<import(".prisma/client").EMPRESA>;
     vistaActualizar(response: any, parametrosRuta: any): Promise<void>;
-    editarEmpresa(parametrosRuta: any, parametrosCuerpo: any, res: any): Promise<any>;
+    editarEmpresa(parametrosRuta: any, parametrosCuerpo: any, response: any): Promise<any>;
 }

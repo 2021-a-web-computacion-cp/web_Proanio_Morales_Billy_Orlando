@@ -152,28 +152,26 @@ export class EmpresaController{
     async editarEmpresa(
         @Param() parametrosRuta,
         @Body() parametrosCuerpo,
-        @Res() res,
+        @Res() response,
     ) {
         const empresa = new EmpresaEditarDTO();
 
         empresa.ruc = parametrosCuerpo.ruc
         empresa.razonSocial = parametrosCuerpo.razonSocial;
-        empresa.telefono = parametrosCuerpo.telefono;
-        empresa.activo  = parametrosCuerpo.activo;
+        empresa.telefono = +parametrosCuerpo.telefono;
 
         try {
-
             const errores = await validate(empresa);
             if (errores.length > 0) {
                 console.error('Error', errores);
-                return res.redirect(
+                return response.redirect(
                     '/empresa/lista-empresas/' + '?error=Error validando datos')
             } else {
                 await this.EmpresaServices.actualizarUno({
                     id: +parametrosRuta.idEmpresa,
-                    data: empresa
+                    data: empresa,
                 });
-                res.redirect(
+                response.redirect(
                     '/empresa/lista-empresas' +
                     '?mensaje= Se actualizo la empresa ' +
                     parametrosCuerpo.razonSocial,

@@ -9,6 +9,13 @@
 
     <h1> Actualizar Empresa </h1>
 
+    <% const existeEmpresa = typeof datos.mensaje !== 'undefined' %>
+    <%  if(existeEmpresa) { %>
+        <div class="alert alert-danger" role="alert">
+            <%= datos.mensaje %>
+        </div>
+    <%} %>
+
     <form   action="/empresa/actualizar-empresa-formulario/<%=datos.empresa.id%>" method="post">
         <div class="mb-3">
             <label for="razonSocial" class="form-label"> Razon Social * </label>
@@ -44,16 +51,6 @@
             </div>
         </div>
 
-        <div class="mb-3">
-
-            <%if(datos.empresa.activo === true){%>
-                <label><input type="checkbox" id="activa" name="activo" checked="checked"> En actividad </label>
-                <div id="ayudaActividad" class="form-text">Esta en Actividad</div>
-            <%}else{%>
-                <label><input type="checkbox" id="activa" name="activo"> En actividad </label>
-                <div id="ayudaActividad" class="form-text">Esta en Actividad</div>
-            <%}%>
-        </div>
 
         <button type="submit" class="btn btn-primary w-100">ACTUALIZAR</button>
     </form>

@@ -115,24 +115,23 @@ let EmpresaController = class EmpresaController {
             throw new common_1.InternalServerErrorException('Error');
         }
     }
-    async editarEmpresa(parametrosRuta, parametrosCuerpo, res) {
+    async editarEmpresa(parametrosRuta, parametrosCuerpo, response) {
         const empresa = new empresa_actualizarDTO_1.EmpresaEditarDTO();
         empresa.ruc = parametrosCuerpo.ruc;
         empresa.razonSocial = parametrosCuerpo.razonSocial;
-        empresa.telefono = parametrosCuerpo.telefono;
-        empresa.activo = parametrosCuerpo.activo;
+        empresa.telefono = +parametrosCuerpo.telefono;
         try {
             const errores = await class_validator_1.validate(empresa);
             if (errores.length > 0) {
                 console.error('Error', errores);
-                return res.redirect('/empresa/lista-empresas/' + '?error=Error validando datos');
+                return response.redirect('/empresa/lista-empresas/' + '?error=Error validando datos');
             }
             else {
                 await this.EmpresaServices.actualizarUno({
                     id: +parametrosRuta.idEmpresa,
-                    data: empresa
+                    data: empresa,
                 });
-                res.redirect('/empresa/lista-empresas' +
+                response.redirect('/empresa/lista-empresas' +
                     '?mensaje= Se actualizo la empresa ' +
                     parametrosCuerpo.razonSocial);
             }
