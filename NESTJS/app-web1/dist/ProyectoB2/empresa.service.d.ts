@@ -8,11 +8,11 @@ export declare class EmpresaService {
         take?: number;
         busqueda?: string;
     }): import(".prisma/client").PrismaPromise<import(".prisma/client").EMPRESA[]>;
-    buscarUno(id: number): void;
+    buscarUno(id: number): Prisma.Prisma__EMPRESAClient<import(".prisma/client").EMPRESA>;
     crearUno(empresa: Prisma.EMPRESACreateInput): Prisma.Prisma__EMPRESAClient<import(".prisma/client").EMPRESA>;
     actualizarUno(parametrosActualizar: {
         id: number;
-        data: Prisma.EPN_USUARIOUpdateInput;
-    }): Prisma.Prisma__EPN_USUARIOClient<import(".prisma/client").EPN_USUARIO>;
+        data: Prisma.EMPRESAUpdateInput;
+    }): Prisma.Prisma__EMPRESAClient<import(".prisma/client").EMPRESA>;
     eliminarUno(id: number): Prisma.Prisma__EMPRESAClient<import(".prisma/client").EMPRESA>;
 }

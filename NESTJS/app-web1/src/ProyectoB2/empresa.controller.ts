@@ -11,6 +11,7 @@ import {
 import {EmpresaService} from "./empresa.service";
 import {validate} from "class-validator";
 import {EmpresaCrearDTO} from "./dto/empresa-crearDTO";
+import {EmpresaEditarDTO} from "./dto/empresa-actualizarDTO";
 
 
 @Controller( 'empresa')
@@ -34,6 +35,8 @@ export class EmpresaController{
             }
         })
     }
+
+
 
     @Post('eliminar-empresa/:idEmpresa')
     async eliminarEmpresas(@Res() response, @Param() parametrosRuta){
@@ -123,4 +126,66 @@ export class EmpresaController{
             throw new InternalServerErrorException('error de servidor');
         }
     }
+
+    // metodo para editar una empresa
+
+
+    @Post ('vista-actualizar/:idEmpresa')
+    async vistaActualizar(@Res() response, @Param() parametrosRuta){
+        try{
+            const respuesta = await this.EmpresaServices.buscarUno(+parametrosRuta.idEmpresa);
+            console.log(respuesta)
+            response.render('proyecto/empresa/actualizar', {
+                datos: {
+                    empresa: respuesta
+                }
+            })
+        } catch (error){
+            console.error(error)
+            throw new InternalServerErrorException('Error')
+        }
+
+    }
+
+
+    @Post('/actualizar-empresa-formulario/:idEmpresa')
+    async editarEmpresa(
+        @Param() parametrosRuta,
+        @Body() parametrosCuerpo,
+        @Res() res,
+    ) {
+        const empresa = new EmpresaEditarDTO();
+
+        empresa.ruc = parametrosCuerpo.ruc
+        empresa.razonSocial = parametrosCuerpo.razonSocial;
+        empresa.telefono = parametrosCuerpo.telefono;
+        empresa.activo  = parametrosCuerpo.activo;
+
+        try {
+
+            const errores = await validate(empresa);
+            if (errores.length > 0) {
+                console.error('Error', errores);
+                return res.redirect(
+                    '/empresa/lista-empresas/' + '?error=Error validando datos')
+            } else {
+                await this.EmpresaServices.actualizarUno({
+                    id: +parametrosRuta.idEmpresa,
+                    data: empresa
+                });
+                res.redirect(
+                    '/empresa/lista-empresas' +
+                    '?mensaje= Se actualizo la empresa ' +
+                    parametrosCuerpo.razonSocial,
+                );
+
+            }
+        }catch (e) {
+            console.error({error: e, mensaje: 'Errores en editar empresa'});
+            throw new InternalServerErrorException('error de servidor');
+            }
+
+        }
+
+
 }

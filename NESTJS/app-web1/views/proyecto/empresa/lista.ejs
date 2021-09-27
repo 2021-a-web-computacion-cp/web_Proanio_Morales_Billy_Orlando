@@ -59,10 +59,16 @@
                 <th> <%= objeto.fechaCreacion.getMonth() + "/" + objeto.fechaCreacion.getFullYear()%> </th>
                 <th> <%= objeto.activo %> </th>
                 <th>
+                    <form action="/empresa/vista-actualizar/<%=objeto.id %>" method="post">
+                        <button class="btn btn-warning"> Actualizar  </button>
+                    </form>
+                </th>
+                <th>
                     <form action="/empresa/eliminar-empresa/<%=objeto.id %>" method="post">
                         <button class="btn btn-danger"> Elimiar </button>
                     </form>
                 </th>
+
             </tr>
         <% } ) %>
         </tbody>

@@ -28,7 +28,7 @@ let EmpresaService = class EmpresaService {
         });
     }
     buscarUno(id) {
-        this.prisma.eMPRESA.findUnique({
+        return this.prisma.eMPRESA.findUnique({
             where: {
                 id: id,
             },
@@ -40,10 +40,10 @@ let EmpresaService = class EmpresaService {
         });
     }
     actualizarUno(parametrosActualizar) {
-        return this.prisma.ePN_USUARIO.update({
+        return this.prisma.eMPRESA.update({
             data: parametrosActualizar.data,
             where: {
-                id: parametrosActualizar.id,
+                id: +parametrosActualizar.id,
             },
         });
     }

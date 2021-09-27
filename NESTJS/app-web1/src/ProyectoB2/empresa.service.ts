@@ -1,6 +1,7 @@
 import {Injectable} from '@nestjs/common'
 import {PrismaService} from "./prisma.service";
 import { Prisma } from '@prisma/client';
+import {EmpresaEditarDTO} from "./dto/empresa-actualizarDTO";
 
 @Injectable()
 export class EmpresaService{
@@ -27,7 +28,7 @@ export class EmpresaService{
     }
 
     buscarUno(id: number){
-        this.prisma.eMPRESA.findUnique({
+       return this.prisma.eMPRESA.findUnique({
             where: {
                 id: id,
             },
@@ -42,15 +43,16 @@ export class EmpresaService{
 
     actualizarUno(parametrosActualizar: {
         id: number;
-        data: Prisma.EPN_USUARIOUpdateInput;
+        data: Prisma.EMPRESAUpdateInput;
     }) {
-        return this.prisma.ePN_USUARIO.update({
+        return this.prisma.eMPRESA.update({
             data: parametrosActualizar.data,
             where: {
-                id: parametrosActualizar.id,
+                id: +parametrosActualizar.id,
             },
         });
     }
+
 
     eliminarUno(id: number) {
         return this.prisma.eMPRESA.delete({

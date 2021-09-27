@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const empresa_service_1 = require("./empresa.service");
 const class_validator_1 = require("class-validator");
 const empresa_crearDTO_1 = require("./dto/empresa-crearDTO");
+const empresa_actualizarDTO_1 = require("./dto/empresa-actualizarDTO");
 let EmpresaController = class EmpresaController {
     constructor(EmpresaServices) {
         this.EmpresaServices = EmpresaServices;
@@ -99,6 +100,48 @@ let EmpresaController = class EmpresaController {
             throw new common_1.InternalServerErrorException('error de servidor');
         }
     }
+    async vistaActualizar(response, parametrosRuta) {
+        try {
+            const respuesta = await this.EmpresaServices.buscarUno(+parametrosRuta.idEmpresa);
+            console.log(respuesta);
+            response.render('proyecto/empresa/actualizar', {
+                datos: {
+                    empresa: respuesta
+                }
+            });
+        }
+        catch (error) {
+            console.error(error);
+            throw new common_1.InternalServerErrorException('Error');
+        }
+    }
+    async editarEmpresa(parametrosRuta, parametrosCuerpo, res) {
+        const empresa = new empresa_actualizarDTO_1.EmpresaEditarDTO();
+        empresa.ruc = parametrosCuerpo.ruc;
+        empresa.razonSocial = parametrosCuerpo.razonSocial;
+        empresa.telefono = parametrosCuerpo.telefono;
+        empresa.activo = parametrosCuerpo.activo;
+        try {
+            const errores = await class_validator_1.validate(empresa);
+            if (errores.length > 0) {
+                console.error('Error', errores);
+                return res.redirect('/empresa/lista-empresas/' + '?error=Error validando datos');
+            }
+            else {
+                await this.EmpresaServices.actualizarUno({
+                    id: +parametrosRuta.idEmpresa,
+                    data: empresa
+                });
+                res.redirect('/empresa/lista-empresas' +
+                    '?mensaje= Se actualizo la empresa ' +
+                    parametrosCuerpo.razonSocial);
+            }
+        }
+        catch (e) {
+            console.error({ error: e, mensaje: 'Errores en editar empresa' });
+            throw new common_1.InternalServerErrorException('error de servidor');
+        }
+    }
 };
 __decorate([
     common_1.Get('inicio'),
@@ -153,6 +196,23 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], EmpresaController.prototype, "crearUno", null);
+__decorate([
+    common_1.Post('vista-actualizar/:idEmpresa'),
+    __param(0, common_1.Res()),
+    __param(1, common_1.Param()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object]),
+    __metadata("design:returntype", Promise)
+], EmpresaController.prototype, "vistaActualizar", null);
+__decorate([
+    common_1.Post('/actualizar-empresa-formulario/:idEmpresa'),
+    __param(0, common_1.Param()),
+    __param(1, common_1.Body()),
+    __param(2, common_1.Res()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Object, Object]),
+    __metadata("design:returntype", Promise)
+], EmpresaController.prototype, "editarEmpresa", null);
 EmpresaController = __decorate([
     common_1.Controller('empresa'),
     __metadata("design:paramtypes", [empresa_service_1.EmpresaService])
