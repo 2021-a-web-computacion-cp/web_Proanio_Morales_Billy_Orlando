@@ -17,7 +17,7 @@ export class EmpresaService{
                 // orderBy?: Prisma.EPN_UsuarioOrder;
             }) {
         const or = parametrosBusqueda.busqueda ? {
-                OR: [ { razonSocila: { contains: parametrosBusqueda.busqueda } },
+                OR: [ { razonSocial: { contains: parametrosBusqueda.busqueda } },
                     { ruc: { contains: parametrosBusqueda.busqueda } },
                 ], } :
             {}; return this.prisma.eMPRESA.findMany(

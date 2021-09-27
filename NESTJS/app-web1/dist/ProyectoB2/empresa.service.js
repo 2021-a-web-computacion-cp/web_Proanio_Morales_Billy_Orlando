@@ -18,7 +18,7 @@ let EmpresaService = class EmpresaService {
     }
     buscarMuchos(parametrosBusqueda) {
         const or = parametrosBusqueda.busqueda ? {
-            OR: [{ razonSocila: { contains: parametrosBusqueda.busqueda } },
+            OR: [{ razonSocial: { contains: parametrosBusqueda.busqueda } },
                 { ruc: { contains: parametrosBusqueda.busqueda } },
             ],
         } :

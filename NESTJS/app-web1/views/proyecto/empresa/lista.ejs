@@ -21,7 +21,7 @@
     <form   action="/empresa/lista-empresas" method="get">
         <div class="mb-3">
             <label for="busqueda" class="form-label"> Busqueda </label>
-            <input placeholder="Ej: PC REPAIRS DP   "
+            <input placeholder="Ej: PC REPAIRS DP  /  17259963650001 "
                    type="text"
                    name="busqueda"
                    class="form-control"
@@ -56,7 +56,7 @@
                 <th> <%= objeto.id %> </th>
                 <th> <%= objeto.razonSocial %> </th>
                 <th> <%= objeto.ruc %> </th>
-                <th> <%= objeto.fechaCreacion %> </th>
+                <th> <%= objeto.fechaCreacion.getMonth() + "/" + objeto.fechaCreacion.getFullYear()%> </th>
                 <th> <%= objeto.activo %> </th>
                 <th>
                     <form action="/empresa/eliminar-empresa/<%=objeto.id %>" method="post">

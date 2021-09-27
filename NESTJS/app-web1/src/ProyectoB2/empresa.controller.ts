@@ -38,7 +38,7 @@ export class EmpresaController{
     @Post('eliminar-empresa/:idEmpresa')
     async eliminarEmpresas(@Res() response, @Param() parametrosRuta){
         try {
-            await this.EmpresaServices.eliminarUno(+parametrosRuta.idUsuario);
+            await this.EmpresaServices.eliminarUno(+parametrosRuta.idEmpresa);
             response.redirect(
                 '/empresa/lista-empresas' + '?mensaje= Se elimino la empresa'
             );
